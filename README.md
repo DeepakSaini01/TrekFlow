@@ -22,6 +22,7 @@ The application is built using the following technologies:
 * **Security:** JSON Web Tokens (JWT) for secure authentication.
 * **Caching:** Redis for caching frequently accessed treks and status.
 * **Background Tasks:** Celery with Redis (as the message broker and result backend).
+* **AI Chatbot Assistant:** Groq Cloud (`llama-3.3-70b-versatile` / `openai/gpt-oss-20b`) & Google Gemini API for real-time trek recommendations and booking support.
 
 ---
 
@@ -39,6 +40,7 @@ trekking_management_system/
 │   ├── controllers/          # Flask API Blueprints (HTTP endpoints)
 │   │   ├── admin_controller.py   # Admin operations (routes, staff management)
 │   │   ├── authcontrollers.py    # Login, signup, token validation
+│   │   ├── chatbot_controller.py # AI Chatbot endpoint (/api/chat) with Groq/Gemini
 │   │   ├── public_controller.py  # Public endpoints (dynamic site settings/stats)
 │   │   ├── staff_controller.py   # Placeholder for future staff extensions
 │   │   └── trek_controller.py    # Trek details, creation, and updates
@@ -64,7 +66,8 @@ trekking_management_system/
 ├── frontend/                 # VueJS 3 Frontend SPA
 │   ├── src/
 │   │   ├── assets/           # Global styles and static assets
-│   │   ├── components/       # Shared UI components (Navbar, Sidebar)
+│   │   ├── components/       # Shared UI components (Navbar, Sidebar, ChatBot)
+│   │   ├── ChatBot.vue   # Floating AI Trek Guide widget with interactive cards
 │   │   ├── router/           # Vue Router navigation paths
 │   │   ├── services/         # API service wrappers (Axios integration)
 │   │   ├── store/            # Pinia state management (authentication & global data)
@@ -109,6 +112,12 @@ trekking_management_system/
 * **Prevent Overbooking:** The system automatically prevents booking a trek if slots are full or if the status is closed.
 * **My Bookings & History:** Trekkers can view active bookings, cancel a booking, or view a history of their past completed/cancelled treks.
 * **Edit Profile:** All roles can edit their personal details (excluding email/password) from their profile page.
+
+### 5. AI Trek Guide (Interactive Chatbot)
+* **Smart Trek Discovery:** Recommends treks based on natural language queries (e.g. *"budget treks under ₹5,000"*, *"easy treks for beginners"*, dates, or locations).
+* **Interactive Trek Cards:** Renders responsive cards inside the chat window with real-time pricing, difficulty badges, available slots, and a direct "View" link.
+* **Trail & Packing Guidance:** Answers practical mountain preparation queries, packing checklists, and site FAQs (booking steps, contact info).
+* **Dual Engine Architecture:** Ultra-fast (<0.5s) responses powered by Groq (`llama-3.3-70b-versatile` / `openai/gpt-oss-20b`) & Google Gemini API, with a robust offline fallback engine.
 
 ---
 

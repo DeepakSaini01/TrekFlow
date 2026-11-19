@@ -81,8 +81,8 @@ const store = useTrekStore();
 const router = useRouter();
 
 const selectedRole = ref('admin');
-const email = ref('admin@trekflow.com');
-const password = ref('admin123');
+const email = ref('');
+const password = ref('');
 const rememberMe = ref(false);
 const errorMessage = ref('');
 

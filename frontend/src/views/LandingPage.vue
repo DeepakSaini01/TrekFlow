@@ -28,10 +28,7 @@
                 <i class="bi bi-arrow-right"></i>
               </router-link>
               
-              <button @click="watchDemo" class="btn btn-outline-light btn-lg py-1 px-1 text-s font-display  d-flex align-items-center justify-content-center gap-2 bg-dark bg-opacity-35 border-secondary border-opacity-30">
-                <i class="bi bi-play-circle-fill text-green"></i>
-                <span>Watch Demo</span>
-              </button>
+              
             </div>
           </div>
         
